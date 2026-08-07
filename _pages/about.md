@@ -1,56 +1,76 @@
 ---
 permalink: /
-title: "Academic Pages is a ready-to-fork GitHub Pages template for academic personal websites"
+title: "Víthor Rosa Franco"
 author_profile: true
-redirect_from: 
+hide_title: true
+redirect_from:
   - /about/
   - /about.html
 ---
 
-This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the repository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. Incidentally, these same features make it a great template for anyone that needs to show off a professional template!
+<div class="home-intro">
+  <p class="eyebrow">VÍTHOR ROSA FRANCO</p>
+  <p class="home-kicker">PSYCHOMETRICS · MATHEMATICAL PSYCHOLOGY · BAYESIAN METHODS</p>
+  <h1 class="home-tagline">I develop quantitative methods for psychological measurement and formal models of behavior.</h1>
+  <p class="home-lead">I am an Assistant Professor of Psychological Assessment in the Postgraduate Program in Psychology at Universidade São Francisco (USF), Brazil. My work sits at the intersection of psychometrics, measurement theory, mathematical psychology, Bayesian inference, and computational modeling.</p>
+  <div class="button-row">
+    <a class="btn btn--primary" href="/research/">Research</a>
+    <a class="btn btn--light-outline" href="/publications/">Publications</a>
+    <a class="btn btn--light-outline" href="/software/">Software</a>
+  </div>
+</div>
 
- You can fork [this template](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and Markdown files, add your own PDFs and other content, and have your own site for free, with no ads!
+## Research
 
-A data-driven personal website
-======
-Like many other Jekyll-based GitHub Pages templates, Academic Pages makes you separate the website's content from its form. The content & metadata of your website are in structured Markdown files, while various other files constitute the theme, specifying how to transform that content & metadata into HTML pages. You keep these various Markdown (.md), YAML (.yml), HTML, and CSS files in a public GitHub repository. Each time you commit and push an update to the repository, the [GitHub pages](https://pages.github.com/) service creates static HTML pages based on these files, which are hosted on GitHub's servers free of charge.
+My research asks a simple question with difficult consequences: **what assumptions are we making when we turn psychological observations into measurements?** I work on methods that make those assumptions more explicit, testable, and useful. Current interests include psychometric theory, item response models, Bayesian hierarchical modeling, nonparametric methods, causal and network models, and computational approaches to psychological assessment.
 
-Many of the features of dynamic content management systems (like Wordpress) can be achieved in this fashion, using a fraction of the computational resources and with far less vulnerability to hacking and DDoSing. You can also modify the theme to your heart's content without touching the content of your site. If you get to a point where you've broken something in Jekyll/HTML/CSS beyond repair, your Markdown files describing your talks, publications, etc. are safe. You can rollback the changes or even delete the repository and start over - just be sure to save the Markdown files! You can also write scripts that process the structured data on the site, such as [this one](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb) that analyzes metadata in pages about talks to display [a map of every location you've given a talk](https://academicpages.github.io/talkmap.html).
+<div class="card-grid">
+  <div class="info-card">
+    <h3>Measurement & psychometrics</h3>
+    <p>Fundamental measurement, item response theory, nonparametric psychometrics, psychometric assumptions, and alternative models of psychological measurement.</p>
+  </div>
+  <div class="info-card">
+    <h3>Bayesian & computational methods</h3>
+    <p>Bayesian hierarchical models, Monte Carlo methods, graphical models, computational statistics, and flexible estimation strategies for behavioral data.</p>
+  </div>
+  <div class="info-card">
+    <h3>Mathematical psychology</h3>
+    <p>Formal theories of psychological processes, representational measurement, decision models, and the use of mathematical structure to sharpen psychological explanation.</p>
+  </div>
+  <div class="info-card">
+    <h3>AI & psychological assessment</h3>
+    <p>Large language models, natural-language data, algorithmic methods, and the opportunities and risks of using AI in psychological measurement and assessment.</p>
+  </div>
+</div>
 
-For those users that need more advanced functionality, the template also supports the following popular tools:
-- [MathJax](https://www.mathjax.org/) for mathematical equations
-- [Mermaid](https://mermaid.js.org/) for diagraming
-- [Plotly](https://plotly.com/javascript/) for plotting
+<p class="section-link"><a href="/research/">More about my research →</a></p>
 
-Getting started
-======
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this template](https://github.com/academicpages/academicpages.github.io) by clicking the "Use this template" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](https://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
+## Selected publications
 
-Site-wide configuration
-------
-The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
+{% assign featured_pubs = site.data.publications | where: "featured", true %}
+<div class="publication-list compact">
+{% for pub in featured_pubs limit: 6 %}
+  <div class="publication-item">
+    <div class="publication-year">{{ pub.year }}</div>
+    <div class="publication-body">
+      <strong>{% if pub.url and pub.url != '' %}<a href="{{ pub.url }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</strong><br>
+      <span>{{ pub.authors }}</span><br>
+      <em>{{ pub.venue }}</em>
+    </div>
+  </div>
+{% endfor %}
+</div>
 
-Create content & metadata
-------
-For site content, there is one Markdown file for each type of content, which are stored in directories like _publications, _talks, _posts, _teaching, or _pages. For example, each talk is a Markdown file in the [_talks directory](https://github.com/academicpages/academicpages.github.io/tree/master/_talks). At the top of each Markdown file is structured data in YAML about the talk, which the theme will parse to do lots of cool stuff. The same structured data about a talk is used to generate the list of talks on the [Talks page](https://academicpages.github.io/talks), each [individual page](https://academicpages.github.io/talks/2012-03-01-talk-1) for specific talks, the talks section for the [CV page](https://academicpages.github.io/cv), and the [map of places you've given a talk](https://academicpages.github.io/talkmap.html) (if you run this [python file](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.py) or [Jupyter notebook](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb), which creates the HTML for the map based on the contents of the _talks directory).
+<p class="section-link"><a href="/publications/">View the complete publication list →</a></p>
 
-**Markdown generator**
+## Open-source software
 
-The repository includes [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-) that converts a CSV containing structured data about talks or presentations into individual Markdown files that will be properly formatted for the Academic Pages template. The sample CSVs in that directory are the ones I used to create my own personal website at stuartgeiger.com. My usual workflow is that I keep a spreadsheet of my publications and talks, then run the code in these notebooks to generate the Markdown files, then commit and push them to the GitHub repository.
+I develop R and C++ tools for Bayesian computation, item response modeling, graphical models, and numerical optimization. The projects are research-oriented and are designed to make methodological ideas directly usable in empirical work.
 
-How to edit your site's GitHub repository
-------
-Many people use a git client to create files on their local computer and then push them to GitHub's servers. If you are not familiar with git, you can directly edit these configuration and Markdown files directly in the github.com interface. Navigate to a file (like [this one](https://github.com/academicpages/academicpages.github.io/blob/master/_talks/2012-03-01-talk-1.md) and click the pencil icon in the top right of the content preview (to the right of the "Raw | Blame | History" buttons). You can delete a file by clicking the trashcan icon to the right of the pencil icon. You can also create new files or upload files by navigating to a directory and clicking the "Create new file" or "Upload files" buttons. 
+<div class="software-strip">
+  <a href="https://github.com/vthorrf/YABS"><strong>YABS</strong><span>Bayesian computation</span></a>
+  <a href="https://github.com/vthorrf/birm"><strong>birm</strong><span>Bayesian item response models</span></a>
+  <a href="https://github.com/vthorrf/gbggm"><strong>gbggm</strong><span>Bayesian graphical models</span></a>
+</div>
 
-Example: editing a Markdown file for a talk
-![Editing a Markdown file for a talk](/images/editing-talk.png)
-
-For more info
-------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/), the [growing wiki](https://github.com/academicpages/academicpages.github.io/wiki), and you can always [ask a question on GitHub](https://github.com/academicpages/academicpages.github.io/discussions). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+<p class="section-link"><a href="/software/">Explore software and code →</a></p>

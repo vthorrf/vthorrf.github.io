@@ -1,36 +1,86 @@
 ---
-layout: archive
-title: "Publications"
 permalink: /publications/
+title: "Publications"
 author_profile: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
+<p class="page-lede">Peer-reviewed articles and other scholarly publications. Links point to the DOI or publisher page when available. For citation metrics and automatically indexed records, see <a href="https://scholar.google.com/citations?user=9ofPywUAAAAJ">Google Scholar</a> or <a href="https://orcid.org/0000-0002-8929-3238">ORCID</a>.</p>
+
+<div class="publication-jump">
+  <a href="#journal-articles">Journal articles</a>
+  <a href="#books-and-chapters">Books & chapters</a>
+  <a href="#editorials">Editorials</a>
+</div>
+
+<h2 id="journal-articles">Peer-reviewed journal articles</h2>
+
+{% assign inpress = site.data.publications | where: "status", "In press" %}
+{% if inpress.size > 0 %}
+<h3>In press</h3>
+<div class="publication-list">
+{% for pub in inpress %}
+  <div class="publication-item">
+    <div class="publication-year">In press</div>
+    <div class="publication-body">
+      <strong>{% if pub.url and pub.url != '' %}<a href="{{ pub.url }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</strong><br>
+      <span>{{ pub.authors }}</span><br>
+      <em>{{ pub.venue }}</em>
+    </div>
+  </div>
+{% endfor %}
+</div>
 {% endif %}
 
-{% include base_path %}
-
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
+{% assign published = site.data.publications | where: "status", "Published" %}
+{% assign years = "2026,2025,2024,2023,2022,2021,2018,2017,2016" | split: "," %}
+{% for year in years %}
+  {% assign year_num = year | plus: 0 %}
+  {% assign year_pubs = published | where: "year", year_num %}
+  {% if year_pubs.size > 0 %}
+    <h3>{{ year }}</h3>
+    <div class="publication-list">
+    {% for pub in year_pubs %}
+      <div class="publication-item">
+        <div class="publication-year">{{ pub.year }}</div>
+        <div class="publication-body">
+          <strong>{% if pub.url and pub.url != '' %}<a href="{{ pub.url }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</strong><br>
+          <span>{{ pub.authors }}</span><br>
+          <em>{{ pub.venue }}</em>
+        </div>
+      </div>
     {% endfor %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endif %}
+    </div>
+  {% endif %}
+{% endfor %}
 
+<h2 id="books-and-chapters">Books & book chapters</h2>
 
+<h3>Edited books</h3>
+<div class="publication-list">
+{% for pub in site.data.books %}
+  <div class="publication-item">
+    <div class="publication-year">{{ pub.year }}</div>
+    <div class="publication-body"><strong>{{ pub.title }}</strong><br><span>{{ pub.authors }}</span><br><em>{{ pub.venue }}</em></div>
+  </div>
+{% endfor %}
+</div>
 
+<h3>Book chapters</h3>
+<div class="publication-list">
+{% for pub in site.data.book_chapters %}
+  <div class="publication-item">
+    <div class="publication-year">{{ pub.year }}</div>
+    <div class="publication-body"><strong>{{ pub.title }}</strong><br><span>{{ pub.authors }}</span><br><em>{{ pub.venue }}</em></div>
+  </div>
+{% endfor %}
+</div>
+
+<h2 id="editorials">Editorials</h2>
+<div class="publication-list">
+{% for pub in site.data.editorials %}
+  <div class="publication-item">
+    <div class="publication-year">{{ pub.year }}</div>
+    <div class="publication-body"><strong><a href="{{ pub.url }}">{{ pub.title }}</a></strong><br><span>{{ pub.authors }}</span><br><em>{{ pub.venue }}</em></div>
+  </div>
+{% endfor %}
+</div>
